@@ -22,11 +22,13 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DataAsyncTask extends AsyncTask<String, Integer, String> {
-    Dialog dialog;
+
     Context context;
+    Dialog dialog;
     RecyclerView recyclerView;
     ProgressBar progressBar;
     ArrayList<Model> model;
@@ -45,7 +47,7 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
         dialog.setContentView(R.layout.progressbar_layout);
         progressBar = (ProgressBar)dialog.findViewById(R.id.progressbar);
         progressBar.incrementProgressBy(50);
-        //progressBar.setProgress(50);
+        progressBar.setProgress(5);
         dialog.show();
     }
 
@@ -59,7 +61,7 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
         URL url;
 
         try {
-            Log.v("TAG", "params[0] => " + params[0]);
+            Log.v("TAG", "[ params[0] ] " + params[0]);
 
             url = new URL(params[0]);
 
@@ -69,20 +71,20 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
 
             int code = urlConnection.getResponseCode();
 
-            Log.v("TAG", "reponse code " + code);
+            Log.v("TAG", "[ reponse-code ]" + code);
 
             if(code != 200) {
                 Log.v("TAG", "Not 200");
                 throw new IOException("Invalid response from server: " + code);
             }
 
-            Log.v("TAG", "Is 200");
+            Log.v("TAG", "response-code => 200");
 
             bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
             builder = new StringBuilder();
 
-            Log.v("TAG", "before while loop");
+            Log.v("TAG", "[ before while loop ]");
 
             while((line = bufferedReader.readLine()) != null) {
                 Log.v("TAG", "line => " + line);
@@ -97,9 +99,12 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
 
             results = builder.toString();
 
+            Log.v("TAG", "[ results ] " + results);
+
             return results;
         } catch(Exception e) {
             e.printStackTrace();
+            Log.v("TAG", "[ Error ] => I thought I could...but I can't");
         } finally {
             if(urlConnection != null) {
                 urlConnection.disconnect();
@@ -120,13 +125,22 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
 
+        Log.v("TAG", "inside => onPostExecute()");
+
         dialog.dismiss();
 
         try {
-            JSONObject root = new JSONObject(result);
-            JSONArray list = root.getJSONArray("drinks");
+            Log.v("TAG", "[ result ] " + result);
 
+            // ERROR - JSONObject throws an error
+
+            //JSONObject root = new JSONObject(result);
+
+            //JSONArray list = root.getJSONArray("drinks");
+
+                /*
             for(int i = 0; i < list.length(); i++) {
+                Log.v("TAG", "inside => onPostExecute() => for => ");
                 model.add(new Model(
                         list.getJSONObject(i).getString("idDrink"),
                         list.getJSONObject(i).getString("strDrink"),
@@ -180,11 +194,12 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
                         list.getJSONObject(i).getString("strCreativeCommonsConfirmed"),
                         list.getJSONObject(i).getString("dateModified")));
             }
+                 */
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        this.recyclerView.setAdapter(new AdapterRecyclerView(model));
+//        this.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//        this.recyclerView.setAdapter(new AdapterRecyclerView(model));
     }
 }
