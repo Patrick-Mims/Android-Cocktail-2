@@ -1,6 +1,6 @@
 package edu.sfsu.cocktail.Models;
 
-public class CocktailModel {
+public class Model {
     public String idDrink;
     public String strDrink;
     public String strTags;
@@ -53,7 +53,7 @@ public class CocktailModel {
     public String dateModified;
 
     // Define constructor
-    public CocktailModel(
+    public Model(
             String idDrink,
             String strDrink,
             String strTags,
@@ -103,7 +103,7 @@ public class CocktailModel {
             String strImageSource,
             String strImageAttribution,
             String strCreativeCommonsConfirmed,
-            String dateModified) {
+            String dateModified, String modified) {
         this.idDrink = idDrink;
         this.strDrink = strDrink;
         this.strTags = strTags;

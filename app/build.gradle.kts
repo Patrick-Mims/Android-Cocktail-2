@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "edu.sfsu.cocktail"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "edu.sfsu.cocktail"
