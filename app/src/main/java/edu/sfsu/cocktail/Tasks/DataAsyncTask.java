@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import edu.sfsu.cocktail.Adapters.AdapterRecyclerView;
 import edu.sfsu.cocktail.Models.Model;
 import edu.sfsu.cocktail.R;
@@ -20,10 +23,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class DataAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -50,7 +49,10 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
         progressBar.setProgress(5);
         dialog.show();
     }
+    // youtube api key
+    // AIzaSyBFPWRNE0FiNMuyeSuztuYTNYQsy8oiqFM
 
+    // AIzaSyD2K14rDsXszx7neG_BxA_F_cdVLJUgTUU
     @Override
     protected String doInBackground(String... params) {
         BufferedReader bufferedReader;
@@ -134,11 +136,11 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
 
             // ERROR - JSONObject throws an error
 
-            //JSONObject root = new JSONObject(result);
+            JSONObject root = new JSONObject(result);
+            JSONArray list = root.getJSONArray("drinks");
 
-            //JSONArray list = root.getJSONArray("drinks");
+            Log.v("TAG", "After JSONObject and JSONArray");
 
-                /*
             for(int i = 0; i < list.length(); i++) {
                 Log.v("TAG", "inside => onPostExecute() => for => ");
                 model.add(new Model(
@@ -194,12 +196,11 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
                         list.getJSONObject(i).getString("strCreativeCommonsConfirmed"),
                         list.getJSONObject(i).getString("dateModified")));
             }
-                 */
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-//        this.recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//        this.recyclerView.setAdapter(new AdapterRecyclerView(model));
+  //        this.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+ //         this.recyclerView.setAdapter(new AdapterRecyclerView(model));
     }
 }

@@ -3,6 +3,7 @@ package edu.sfsu.cocktail.Models;
 public class Model {
     public String idDrink;
     public String strDrink;
+    public String strDrinkAlternative;
     public String strTags;
     public String strVideo;
     public String strCategory;
@@ -56,6 +57,7 @@ public class Model {
     public Model(
             String idDrink,
             String strDrink,
+            String strDrinkAlternative,
             String strTags,
             String strVideo,
             String strCategory,
@@ -103,9 +105,10 @@ public class Model {
             String strImageSource,
             String strImageAttribution,
             String strCreativeCommonsConfirmed,
-            String dateModified, String modified) {
+            String dateModified) {
         this.idDrink = idDrink;
         this.strDrink = strDrink;
+        this.strDrinkAlternative = strDrinkAlternative;
         this.strTags = strTags;
         this.strVideo = strVideo;
         this.strCategory = strCategory;
@@ -162,6 +165,14 @@ public class Model {
 
     public void setIdDrink(String idDrink) {
         this.idDrink = idDrink;
+    }
+
+    public String getStrDrinkAlternative() {
+        return strDrinkAlternative;
+    }
+
+    public void setStrDrinkAlternative(String strDrinkAlternative) {
+        this.strDrinkAlternative = strDrinkAlternative;
     }
 
     public String getStrDrink() {
