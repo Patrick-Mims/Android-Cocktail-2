@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     private static String ENDPOINT = Uri.parse("https://www.thecocktaildb.com/api/json/v1/1/search.php")
             .buildUpon()
-            .appendQueryParameter("s", "margarita")
+            .appendQueryParameter("s", "martini")
             .build().toString();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

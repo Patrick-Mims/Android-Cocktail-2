@@ -4,11 +4,9 @@ import static edu.sfsu.cocktail.DetailActivity.EXTRA_ID;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +25,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         this.model = model;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView idDrink;
         TextView strDrink;
         TextView strDrinkAlternate;
@@ -75,14 +73,16 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         TextView strMeasure13;
         TextView strMeasure14;
         TextView strMeasure15;
+        /*
         TextView strImageSource;
         TextView strImageAttribution;
         TextView strCreativeCommonsConfirmed;
         TextView dateModified;
+        */
 
         public ViewHolder(@NonNull View view) {
             super(view);
-            this.idDrink = view.findViewById(R.id.idDrink);
+            //this.idDrink = view.findViewById(R.id.idDrink);
             this.strDrink = view.findViewById(R.id.strDrink);
             this.strDrinkAlternate = view.findViewById(R.id.strDrinkAlternate);
             this.strTags = view.findViewById(R.id.strTags);
@@ -92,12 +92,14 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
             this.strAlcoholic = view.findViewById(R.id.strAlcoholic);
             this.strGlass = view.findViewById(R.id.strGlass);
             this.strInstructions = view.findViewById(R.id.strInstructions);
+            /*
             this.strInstructionsES = view .findViewById(R.id.strInstructionsES);
             this.strInstructionsDE = view .findViewById(R.id.strInstructionsDE);
             this.strInstructionsFR = view .findViewById(R.id.strInstructionsFR);
             this.strInstructionsIT = view .findViewById(R.id.strInstructionsIT);
             this.strInstructionsZH_HANS = view .findViewById(R.id.strInstructionsZH_HANS);
             this.strInstructionsZH_HANT = view .findViewById(R.id.strInstructionsZH_HANT);
+            */
             this.strDrinkThumb = view.findViewById(R.id.strDrinkThumb);
             this.strIngredient1 = view.findViewById(R.id.strIngredient1);
             this.strIngredient2 = view.findViewById(R.id.strIngredient2);
@@ -129,10 +131,12 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
             this.strMeasure13 = view.findViewById(R.id.strMeasure13);
             this.strMeasure14 = view.findViewById(R.id.strMeasure14);
             this.strMeasure15 = view.findViewById(R.id.strMeasure15);
+            /*
             this.strImageSource = view.findViewById(R.id.strImageSource);
             this.strImageAttribution = view.findViewById(R.id.strImageAttribution);
             this.strCreativeCommonsConfirmed = view.findViewById(R.id.strCreativeCommonsConfirmed);
             this.dateModified = view.findViewById(R.id.dateModified);
+            */
         }
     }
 
@@ -146,8 +150,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Model mod = model.get(position);
-
-        holder.idDrink.setText(String.format("%s", mod.getIdDrink()));
+        // holder.idDrink.setText(String.format("%s", mod.getIdDrink()));
         holder.strDrink.setText(String.format("%s", mod.getStrDrink()));
         holder.strDrinkAlternate.setText(String.format("%s", mod.getStrDrinkAlternate()));
         holder.strTags.setText(String.format("%s", mod.getStrTags()));
@@ -157,12 +160,14 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         holder.strAlcoholic.setText(String.format("%s", mod.getStrAlcoholic()));
         holder.strGlass.setText(String.format("%s", mod.getStrGlass()));
         holder.strInstructions.setText(String.format("%s", mod.getStrInstructions()));
+        /*
         holder.strInstructionsES.setText(String.format("%s", mod.getStrInstructionsES()));
         holder.strInstructionsDE.setText(String.format("%s", mod.getStrInstructionsDE()));
         holder.strInstructionsFR.setText(String.format("%s", mod.getStrInstructionsFR()));
         holder.strInstructionsIT.setText(String.format("%s", mod.getStrInstructionsIT()));
         holder.strInstructionsZH_HANS.setText(String.format("%s", mod.getStrInstructionsZH_HANS()));
         holder.strInstructionsZH_HANT.setText(String.format("%s", mod.getStrInstructionsZH_HANT()));
+        */
         holder.strDrinkThumb.setText(String.format("%s", mod.getStrDrinkThumb()));
         holder.strIngredient1.setText(String.format("%s", mod.getStrIngredient1()));
         holder.strIngredient2.setText(String.format("%s", mod.getStrIngredient2()));
@@ -194,10 +199,13 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         holder.strMeasure13.setText(String.format("%s", mod.getStrMeasure13()));
         holder.strMeasure14.setText(String.format("%s", mod.getStrMeasure14()));
         holder.strMeasure15.setText(String.format("%s", mod.getStrMeasure15()));
+
+        /*
         holder.strImageSource.setText(String.format("%s", mod.getStrImageSource()));
         holder.strImageAttribution.setText(String.format("%s", mod.getStrImageAttribution()));
         holder.strCreativeCommonsConfirmed.setText(String.format("%s", mod.getStrCreativeCommonsConfirmed()));
         holder.dateModified.setText(String.format("%s", mod.getDateModified()));
+        */
 
         holder.strDrinkThumb.setOnClickListener(new View.OnClickListener() {
             @Override
