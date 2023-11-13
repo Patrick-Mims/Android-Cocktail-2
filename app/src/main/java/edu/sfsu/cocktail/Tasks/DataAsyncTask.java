@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.sfsu.cocktail.Adapters.AdapterRecyclerView;
@@ -26,11 +27,11 @@ import java.util.ArrayList;
 
 public class DataAsyncTask extends AsyncTask<String, Integer, String> {
 
+    ArrayList<Model> model;
     Context context;
     Dialog dialog;
-    RecyclerView recyclerView;
     ProgressBar progressBar;
-    ArrayList<Model> model;
+    RecyclerView recyclerView;
     TextView tvLoading, tvPer;
 
     public DataAsyncTask(Context context, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<Model> model) {
@@ -63,37 +64,23 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
         URL url;
 
         try {
-            Log.v("TAG", "[ params[0] ] " + params[0]);
-
             url = new URL(params[0]);
 
             urlConnection = (HttpURLConnection) url.openConnection();
 
-            Log.v("TAG", "try throw block 2.0");
-
             int code = urlConnection.getResponseCode();
 
-            Log.v("TAG", "[ reponse-code ]" + code);
-
             if(code != 200) {
-                Log.v("TAG", "Not 200");
                 throw new IOException("Invalid response from server: " + code);
             }
-
-            Log.v("TAG", "response-code => 200");
 
             bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
             builder = new StringBuilder();
 
-            Log.v("TAG", "[ before while loop ]");
-
             while((line = bufferedReader.readLine()) != null) {
-                Log.v("TAG", "line => " + line);
                 builder.append(line).append("\n");
             }
-
-            Log.v("TAG", "after while loop");
 
             if(builder.length() == 0) {
                 return null;
@@ -101,12 +88,9 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
 
             results = builder.toString();
 
-            Log.v("TAG", "[ results ] " + results);
-
             return results;
         } catch(Exception e) {
             e.printStackTrace();
-            Log.v("TAG", "[ Error ] => I thought I could...but I can't");
         } finally {
             if(urlConnection != null) {
                 urlConnection.disconnect();
@@ -124,25 +108,22 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
         tvPer.setText(values[0] + " %");
     }
 
+    /**
+     * @param result
+     * onPostExecute(String)
+     * This method takes the return value from doInBackground (which should be the json data returned)
+     */
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
 
-        Log.v("TAG", "inside => onPostExecute()");
-
-        dialog.dismiss();
+        // dialog.dismiss();
 
         try {
-            Log.v("TAG", "[ result ] " + result);
-
-            // ERROR - JSONObject throws an error
-
             JSONObject root = new JSONObject(result);
-            JSONArray list = root.getJSONArray("drinks");
+            JSONArray list = root.getJSONArray("drinks"); // Drinks[] is an array of objects
 
-            Log.v("TAG", "After JSONObject and JSONArray");
-
+            // Each json value that gets returned, will have its value added to the model
             for(int i = 0; i < list.length(); i++) {
-                Log.v("TAG", "inside => onPostExecute() => for => ");
                 model.add(new Model(
                         list.getJSONObject(i).getString("idDrink"),
                         list.getJSONObject(i).getString("strDrink"),
@@ -192,7 +173,7 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
                         list.getJSONObject(i).getString("strMeasure14"),
                         list.getJSONObject(i).getString("strMeasure15"),
                         list.getJSONObject(i).getString("strImageSource"),
-                        list.getJSONObject(i).getString("strImageAttrition"),
+                        list.getJSONObject(i).getString("strImageAttribution"),
                         list.getJSONObject(i).getString("strCreativeCommonsConfirmed"),
                         list.getJSONObject(i).getString("dateModified")));
             }
@@ -200,7 +181,7 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
             throw new RuntimeException(e);
         }
 
-  //        this.recyclerView.setLayoutManager(new LinearLayoutManager(context));
- //         this.recyclerView.setAdapter(new AdapterRecyclerView(model));
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        this.recyclerView.setAdapter(new AdapterRecyclerView(model));
     }
 }

@@ -7,7 +7,7 @@ import android.os.Bundle;
 public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_ID = "ID";
     public static final String EXTRA_DRINK = "DRINK";
-    public static final String EXTRA_DRINK_ALTERNATIVE = "DRINK_ALTERNATIVE";
+    public static final String EXTRA_DRINK_ALTERNATE = "DRINK_ALTERNATE";
     public static final String EXTRA_STR_TAGS = "STR_TAGS";
     public static final String EXTRA_STR_VIDEO = "STR_VIDEO";
     public static final String EXTRA_STR_CATEGORY = "STR_CATEGORY";

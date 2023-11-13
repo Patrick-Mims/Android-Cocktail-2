@@ -16,26 +16,21 @@ import edu.sfsu.cocktail.Models.Model;
 import edu.sfsu.cocktail.Tasks.DataAsyncTask;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<Model> model = null;
+    ArrayList<Model> cocktailModel = null;
     ProgressBar progressBar;
     RecyclerView recyclerView;
-    /*
     private static String ENDPOINT = Uri.parse("https://www.thecocktaildb.com/api/json/v1/1/search.php")
             .buildUpon()
             .appendQueryParameter("s", "margarita")
             .build().toString();
-     */
-    private static final String api = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        model = new ArrayList<>();
+        cocktailModel = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
 
-        Log.v("TAG", "[ ENDPOINT ] " + api);
-
-        new DataAsyncTask(this, recyclerView, progressBar, model).execute(api);
+        new DataAsyncTask(this, recyclerView, progressBar, cocktailModel).execute(ENDPOINT);
     }
 }

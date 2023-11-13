@@ -3,7 +3,7 @@ package edu.sfsu.cocktail.Models;
 public class Model {
     public String idDrink;
     public String strDrink;
-    public String strDrinkAlternative;
+    public String strDrinkAlternate;
     public String strTags;
     public String strVideo;
     public String strCategory;
@@ -57,7 +57,7 @@ public class Model {
     public Model(
             String idDrink,
             String strDrink,
-            String strDrinkAlternative,
+            String strDrinkAlternate,
             String strTags,
             String strVideo,
             String strCategory,
@@ -105,10 +105,12 @@ public class Model {
             String strImageSource,
             String strImageAttribution,
             String strCreativeCommonsConfirmed,
-            String dateModified) {
+            String dateModified
+    ) {
+
         this.idDrink = idDrink;
         this.strDrink = strDrink;
-        this.strDrinkAlternative = strDrinkAlternative;
+        this.strDrinkAlternate = strDrinkAlternate;
         this.strTags = strTags;
         this.strVideo = strVideo;
         this.strCategory = strCategory;
@@ -133,11 +135,11 @@ public class Model {
         this.strIngredient8 = strIngredient8;
         this.strIngredient9 = strIngredient9;
         this.strIngredient10 = strIngredient10;
-        this.strIngredient11 = strIngredient1;
-        this.strIngredient12 = strIngredient2;
-        this.strIngredient13 = strIngredient3;
-        this.strIngredient14 = strIngredient4;
-        this.strIngredient15 = strIngredient5;
+        this.strIngredient11 = strIngredient11;
+        this.strIngredient12 = strIngredient12;
+        this.strIngredient13 = strIngredient13;
+        this.strIngredient14 = strIngredient14;
+        this.strIngredient15 = strIngredient15;
         this.strMeasure1 = strMeasure1;
         this.strMeasure2 = strMeasure2;
         this.strMeasure3 = strMeasure3;
@@ -154,7 +156,7 @@ public class Model {
         this.strMeasure14 = strMeasure14;
         this.strMeasure15 = strMeasure15;
         this.strImageSource = strImageSource;
-        this.strImageAttribution = strImageAttribution;
+        this.strImageAttribution= strImageAttribution;
         this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
         this.dateModified = dateModified;
     }
@@ -167,12 +169,12 @@ public class Model {
         this.idDrink = idDrink;
     }
 
-    public String getStrDrinkAlternative() {
-        return strDrinkAlternative;
+    public String getStrDrinkAlternate() {
+        return strDrinkAlternate;
     }
 
-    public void setStrDrinkAlternative(String strDrinkAlternative) {
-        this.strDrinkAlternative = strDrinkAlternative;
+    public void setStrDrinkAlternate(String strDrinkAlternate) {
+        this.strDrinkAlternate = strDrinkAlternate;
     }
 
     public String getStrDrink() {
