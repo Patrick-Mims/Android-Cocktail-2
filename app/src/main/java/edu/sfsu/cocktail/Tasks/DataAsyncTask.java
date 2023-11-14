@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -180,8 +181,9 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        // LinearLayManager is the default
+        // this.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        this.recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
         this.recyclerView.setAdapter(new AdapterRecyclerView(model));
     }
 }

@@ -5,11 +5,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ProgressBar;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import edu.sfsu.cocktail.Models.Model;
@@ -23,6 +20,15 @@ public class MainActivity extends AppCompatActivity {
             .buildUpon()
             .appendQueryParameter("s", "martini")
             .build().toString();
+
+    /**
+     * When you compile your app, each XML layout file is compiled into a View resource.
+     * Load the layout resource in your app's Activity.onCreate() callback implementation.
+     * Do so by calling setContentView(), passing it the reference to your layout resource:
+     * R.layout.layout_file_name
+     * example:  setContentView(R.layout.main_layout);
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
