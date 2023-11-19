@@ -3,7 +3,9 @@ package edu.sfsu.cocktail.Tasks;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.SystemClock;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -42,14 +44,21 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
         this.model = model;
     }
 
+    /**
+     * onPreExecute()
+     * Called on the main thread
+     */
     protected void onPreExecute() {
         super.onPreExecute();
+        /*
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.progressbar_layout);
         progressBar = (ProgressBar)dialog.findViewById(R.id.progressbar);
-        progressBar.incrementProgressBy(50);
         progressBar.setProgress(5);
         dialog.show();
+        */
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setProgress(0);
     }
     // youtube api key
     // AIzaSyBFPWRNE0FiNMuyeSuztuYTNYQsy8oiqFM
@@ -64,7 +73,10 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
         StringBuilder builder;
         URL url;
 
+        int i = 0;
+
         try {
+            publishProgress(i);
             url = new URL(params[0]);
 
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -88,6 +100,7 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
             }
 
             results = builder.toString();
+            i++;
 
             return results;
         } catch(Exception e) {
@@ -102,22 +115,17 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
     }
 
     protected void onProgressUpdate(Integer... values) {
-        super.onProgressUpdate(values);
+        //super.onProgressUpdate(values);
 
         progressBar.setProgress(values[0]);
-        tvLoading.setText("Loading..." + values[0] + " %");
-        tvPer.setText(values[0] + " %");
+        //tvLoading.setText("Loading..." + values[0] + " %");
+        //tvPer.setText(values[0] + " %");
     }
 
-    /**
-     * @param result
-     * onPostExecute(String)
-     * This method takes the return value from doInBackground (which should be the json data returned)
-     */
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
 
-        // dialog.dismiss();
+        progressBar.setVisibility(View.GONE);
 
         try {
             JSONObject root = new JSONObject(result);

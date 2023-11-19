@@ -1,8 +1,15 @@
 package edu.sfsu.cocktail;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import edu.sfsu.cocktail.ViewModel.DrinkViewModel;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_ID = "ID";
@@ -15,12 +22,6 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_STR_ALCOHOLIC = "STR_ALCOHOLIC";
     public static final String EXTRA_STR_GLASS = "STR_GLASS";
     public static final String EXTRA_STR_INSTRUCTIONS = "STR_INSTRUCTIONS";
-    public static final String EXTRA_STR_INSTRUCTIONS_ES = "STR_INSTRUCTIONS_ES";
-    public static final String EXTRA_STR_INSTRUCTIONS_DE = "STR_INSTRUCTIONS_DE";
-    public static final String EXTRA_STR_INSTRUCTIONS_FR = "STR_INSTRUCTIONS_FR";
-    public static final String EXTRA_STR_INSTRUCTIONS_IT = "STR_INSTRUCTIONS_IT";
-    public static final String EXTRA_STR_INSTRUCTIONS_ZH_HANS = "STR_INSTRUCTIONS_HANS";
-    public static final String EXTRA_STR_INSTRUCTIONS_ZH_HANT = "STR_INSTRUCTIONS_HANT";
     public static final String EXTRA_STR_DRINK_THUMB = "STR_DRINK_THUMB";
     public static final String EXTRA_STR_INGREDIENT1 = "STR_INGREDIENT1";
     public static final String EXTRA_STR_INGREDIENT2 = "STR_INGREDIENT2";
@@ -52,14 +53,37 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_STR_MEASURE13 = "STR_MEASURE13";
     public static final String EXTRA_STR_MEASURE14 = "STR_MEASURE14";
     public static final String EXTRA_STR_MEASURE15 = "STR_MEASURE15";
-    public static final String EXTRA_STR_IMAGE_SOURCE = "STR_IMAGE_SOURCE";
-    public static final String EXTRA_STR_IMAGE_ATTRIBUTION = "STR_IMAGE_ATTRIBUTION";
-    public static final String EXTRA_STR_CREATIVE_COMMONS_CONFIRMED = "STR_CREATIVE_COMMONS_CONFIRMED";
-    public static final String EXTRA_DATE_MODIFIED = "STR_DATE_MODIFIED";
+    DrinkViewModel drinkViewModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        TextView tv = findViewById(R.id.vm);
+
+        drinkViewModel = new ViewModelProvider(this).get(DrinkViewModel.class);
+
+        final Observer<String> scoreObserver = new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+               tv.setText("Patrick");
+            }
+        };
+
+        /**
+         * I need to create an Intent to call this Activity or 'this'...going to bed :<
+         */
+
+        //drinkViewModel.getScore().observe(this, scoreObserver);
+
+        /*
+        drinkViewModel.getScore().observe(this, new Observer<DrinkViewModel>() {
+            @Override
+            public void onChanged(DrinkViewModel model) {
+                tv.setText(model.getScore());
+            }
+        });
+        */
+
     }
 }
