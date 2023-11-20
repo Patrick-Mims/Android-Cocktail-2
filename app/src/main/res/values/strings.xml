@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Cocktail</string>
-    <string name="bull">Dong King</string>
+    <string name="drink_thumbnail">Drink Image</string>
 </resources>

@@ -50,13 +50,6 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
      */
     protected void onPreExecute() {
         super.onPreExecute();
-        /*
-        dialog = new Dialog(context);
-        dialog.setContentView(R.layout.progressbar_layout);
-        progressBar = (ProgressBar)dialog.findViewById(R.id.progressbar);
-        progressBar.setProgress(5);
-        dialog.show();
-        */
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setProgress(0);
     }
@@ -115,7 +108,7 @@ public class DataAsyncTask extends AsyncTask<String, Integer, String> {
     }
 
     protected void onProgressUpdate(Integer... values) {
-        //super.onProgressUpdate(values);
+        super.onProgressUpdate(values);
 
         progressBar.setProgress(values[0]);
         //tvLoading.setText("Loading..." + values[0] + " %");

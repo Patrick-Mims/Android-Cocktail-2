@@ -1,6 +1,5 @@
 package edu.sfsu.cocktail;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     DrinkViewModel drinkViewModel;
     RecyclerView recyclerView;
-    private static String ENDPOINT = Uri.parse("https://www.thecocktaildb.com/api/json/v1/1/search.php")
+
+    private static final String ENDPOINT = Uri.parse("https://www.thecocktaildb.com/api/json/v1/1/search.php")
             .buildUpon()
             .appendQueryParameter("s", "martini")
             .build().toString();
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         cocktailModel = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
-        ProgressBar progressBar = findViewById(R.id.progressbar);
+        progressBar = findViewById(R.id.progressbar);
 
         new DataAsyncTask(this, recyclerView, progressBar, cocktailModel).execute(ENDPOINT);
 
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         final Observer<Model> drinkObserver = new Observer<Model>() {
             @Override
             public void onChanged(Model model) {
-                textView.setText(R.string.bull);
+                textView.setText(R.string.app_name);
             }
         };
 

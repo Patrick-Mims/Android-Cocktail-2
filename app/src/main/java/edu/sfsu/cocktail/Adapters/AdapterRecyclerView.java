@@ -4,13 +4,17 @@ import static edu.sfsu.cocktail.DetailActivity.EXTRA_ID;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,7 +46,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         TextView strInstructionsIT;
         TextView strInstructionsZH_HANS;
         TextView strInstructionsZH_HANT;
-        TextView strDrinkThumb;
+        ImageView strDrinkThumb;
         TextView strIngredient1;
         TextView strIngredient2;
         TextView strIngredient3;
@@ -100,7 +104,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
             this.strInstructionsZH_HANS = view .findViewById(R.id.strInstructionsZH_HANS);
             this.strInstructionsZH_HANT = view .findViewById(R.id.strInstructionsZH_HANT);
             */
-            this.strDrinkThumb = view.findViewById(R.id.strDrinkThumb);
+            this.strDrinkThumb = view.findViewById(R.id.imageView);
             this.strIngredient1 = view.findViewById(R.id.strIngredient1);
             this.strIngredient2 = view.findViewById(R.id.strIngredient2);
             this.strIngredient3 = view.findViewById(R.id.strIngredient3);
@@ -147,8 +151,10 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         return new ViewHolder(view);
     }
 
+    private int imageWidth, imageHeight;
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        imageHeight = 300;
         Model mod = model.get(position);
         // holder.idDrink.setText(String.format("%s", mod.getIdDrink()));
         holder.strDrink.setText(String.format("%s", mod.getStrDrink()));
@@ -168,7 +174,9 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         holder.strInstructionsZH_HANS.setText(String.format("%s", mod.getStrInstructionsZH_HANS()));
         holder.strInstructionsZH_HANT.setText(String.format("%s", mod.getStrInstructionsZH_HANT()));
         */
-        holder.strDrinkThumb.setText(String.format("%s", mod.getStrDrinkThumb()));
+        //holder.strDrinkThumb.setText(String.format("%s", mod.getStrDrinkThumb()));
+        // Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(imageWidth, imageHeight).centerCrop().into(holder.strDrinkThumb);
+        Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(imageWidth, imageHeight).centerCrop().into(holder.strDrinkThumb);
         holder.strIngredient1.setText(String.format("%s", mod.getStrIngredient1()));
         holder.strIngredient2.setText(String.format("%s", mod.getStrIngredient2()));
         holder.strIngredient3.setText(String.format("%s", mod.getStrIngredient3()));
