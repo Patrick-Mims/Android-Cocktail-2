@@ -1,13 +1,24 @@
 package edu.sfsu.cocktail.Adapters;
 
 import static androidx.core.content.ContextCompat.startActivity;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_ID;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_DRINK;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_DRINK_ALTERNATE;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_DRINK_THUMB;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_TAGS;
-
-
-import static edu.sfsu.cocktail.DetailActivity.EXTRA_ID;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_CATEGORY;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_IBA;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_ALCOHOLIC;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_GLASS;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INSTRUCTIONS;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT1;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT2;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT3;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT4;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_MEASURE1;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_MEASURE2;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_MEASURE3;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_MEASURE4;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +41,7 @@ import edu.sfsu.cocktail.MainActivity;
 import edu.sfsu.cocktail.Misc.CropSquareTransformation;
 import edu.sfsu.cocktail.Misc.Misc;
 import edu.sfsu.cocktail.Models.Model;
+import edu.sfsu.cocktail.Picasso.RoundedTransformation;
 import edu.sfsu.cocktail.R;
 
 public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.ViewHolder> {
@@ -153,7 +165,8 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         */
         // Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(0, 350).into(holder.strDrinkThumb);
         //Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).transform(new CropSquareTransformation()).into(holder.strDrinkThumb);
-        Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(0, 350).into(holder.strDrinkThumb);
+       //  Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(0, 350).transform(new RoundedTransformation(100, 0)).into(holder.strDrinkThumb);
+        Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).transform(new RoundedTransformation(75, 0)).into(holder.strDrinkThumb);
         /*
         holder.strIngredient1.setText(String.format("%s", mod.getStrIngredient1()));
         holder.strIngredient2.setText(String.format("%s", mod.getStrIngredient2()));
@@ -199,6 +212,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
                 intent.putExtra(EXTRA_DRINK, mod.getStrDrink());
                 intent.putExtra(EXTRA_DRINK_ALTERNATE, mod.getStrTags());
                 intent.putExtra(EXTRA_STR_DRINK_THUMB, mod.getStrDrinkThumb());
+                intent.putExtra(EXTRA_ID, mod.getIdDrink());
 
                 //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

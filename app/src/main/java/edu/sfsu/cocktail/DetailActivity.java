@@ -60,13 +60,16 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        String id = getIntent().getStringExtra(EXTRA_ID);
         String drink = getIntent().getStringExtra(EXTRA_DRINK);
         String image = getIntent().getStringExtra(EXTRA_STR_DRINK_THUMB);
 
         ImageView imageView = findViewById(R.id.mainImg);
         TextView tv_drink = findViewById(R.id.mainDrink);
+        TextView tv_id = findViewById(R.id.drinkID);
 
         Picasso.get().load(Uri.parse(image)).resize(700, 700).into(imageView);
+        tv_id.setText(id);
         tv_drink.setText(drink);
     }
 }
