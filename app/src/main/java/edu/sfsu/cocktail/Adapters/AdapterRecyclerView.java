@@ -153,7 +153,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         */
         // Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(0, 350).into(holder.strDrinkThumb);
         //Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).transform(new CropSquareTransformation()).into(holder.strDrinkThumb);
-        Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).into(holder.strDrinkThumb);
+        Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(0, 350).into(holder.strDrinkThumb);
         /*
         holder.strIngredient1.setText(String.format("%s", mod.getStrIngredient1()));
         holder.strIngredient2.setText(String.format("%s", mod.getStrIngredient2()));
