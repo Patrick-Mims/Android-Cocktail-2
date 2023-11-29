@@ -1,5 +1,12 @@
 package edu.sfsu.cocktail.Adapters;
 
+import static androidx.core.content.ContextCompat.startActivity;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_DRINK;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_DRINK_ALTERNATE;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_DRINK_THUMB;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_TAGS;
+
+
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_ID;
 
 import android.content.Context;
@@ -19,11 +26,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import edu.sfsu.cocktail.DetailActivity;
+import edu.sfsu.cocktail.MainActivity;
+import edu.sfsu.cocktail.Misc.CropSquareTransformation;
+import edu.sfsu.cocktail.Misc.Misc;
 import edu.sfsu.cocktail.Models.Model;
 import edu.sfsu.cocktail.R;
 
 public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.ViewHolder> {
-    Context context;
+    static Context context;
     ArrayList<Model> model;
     public AdapterRecyclerView(ArrayList<Model> model) {
         this.model = model;
@@ -40,12 +50,6 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         TextView strAlcoholic;
         TextView strGlass;
         TextView strInstructions;
-        TextView strInstructionsES;
-        TextView strInstructionsDE;
-        TextView strInstructionsFR;
-        TextView strInstructionsIT;
-        TextView strInstructionsZH_HANS;
-        TextView strInstructionsZH_HANT;
         ImageView strDrinkThumb;
         TextView strIngredient1;
         TextView strIngredient2;
@@ -77,17 +81,12 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         TextView strMeasure13;
         TextView strMeasure14;
         TextView strMeasure15;
-        /*
-        TextView strImageSource;
-        TextView strImageAttribution;
-        TextView strCreativeCommonsConfirmed;
-        TextView dateModified;
-        */
-
         public ViewHolder(@NonNull View view) {
             super(view);
             //this.idDrink = view.findViewById(R.id.idDrink);
             this.strDrink = view.findViewById(R.id.strDrink);
+            this.strDrinkThumb = view.findViewById(R.id.imageView);
+           /*
             this.strDrinkAlternate = view.findViewById(R.id.strDrinkAlternate);
             this.strTags = view.findViewById(R.id.strTags);
             this.strVideo = view.findViewById(R.id.strVideo);
@@ -96,15 +95,6 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
             this.strAlcoholic = view.findViewById(R.id.strAlcoholic);
             this.strGlass = view.findViewById(R.id.strGlass);
             this.strInstructions = view.findViewById(R.id.strInstructions);
-            /*
-            this.strInstructionsES = view .findViewById(R.id.strInstructionsES);
-            this.strInstructionsDE = view .findViewById(R.id.strInstructionsDE);
-            this.strInstructionsFR = view .findViewById(R.id.strInstructionsFR);
-            this.strInstructionsIT = view .findViewById(R.id.strInstructionsIT);
-            this.strInstructionsZH_HANS = view .findViewById(R.id.strInstructionsZH_HANS);
-            this.strInstructionsZH_HANT = view .findViewById(R.id.strInstructionsZH_HANT);
-            */
-            this.strDrinkThumb = view.findViewById(R.id.imageView);
             this.strIngredient1 = view.findViewById(R.id.strIngredient1);
             this.strIngredient2 = view.findViewById(R.id.strIngredient2);
             this.strIngredient3 = view.findViewById(R.id.strIngredient3);
@@ -135,11 +125,6 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
             this.strMeasure13 = view.findViewById(R.id.strMeasure13);
             this.strMeasure14 = view.findViewById(R.id.strMeasure14);
             this.strMeasure15 = view.findViewById(R.id.strMeasure15);
-            /*
-            this.strImageSource = view.findViewById(R.id.strImageSource);
-            this.strImageAttribution = view.findViewById(R.id.strImageAttribution);
-            this.strCreativeCommonsConfirmed = view.findViewById(R.id.strCreativeCommonsConfirmed);
-            this.dateModified = view.findViewById(R.id.dateModified);
             */
         }
     }
@@ -151,13 +136,12 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         return new ViewHolder(view);
     }
 
-    private int imageWidth, imageHeight;
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        imageHeight = 300;
         Model mod = model.get(position);
-        // holder.idDrink.setText(String.format("%s", mod.getIdDrink()));
         holder.strDrink.setText(String.format("%s", mod.getStrDrink()));
+        CropSquareTransformation cropSquareTransformation = new CropSquareTransformation();
+        /*
         holder.strDrinkAlternate.setText(String.format("%s", mod.getStrDrinkAlternate()));
         holder.strTags.setText(String.format("%s", mod.getStrTags()));
         holder.strVideo.setText(String.format("%s", mod.getStrVideo()));
@@ -166,17 +150,11 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         holder.strAlcoholic.setText(String.format("%s", mod.getStrAlcoholic()));
         holder.strGlass.setText(String.format("%s", mod.getStrGlass()));
         holder.strInstructions.setText(String.format("%s", mod.getStrInstructions()));
-        /*
-        holder.strInstructionsES.setText(String.format("%s", mod.getStrInstructionsES()));
-        holder.strInstructionsDE.setText(String.format("%s", mod.getStrInstructionsDE()));
-        holder.strInstructionsFR.setText(String.format("%s", mod.getStrInstructionsFR()));
-        holder.strInstructionsIT.setText(String.format("%s", mod.getStrInstructionsIT()));
-        holder.strInstructionsZH_HANS.setText(String.format("%s", mod.getStrInstructionsZH_HANS()));
-        holder.strInstructionsZH_HANT.setText(String.format("%s", mod.getStrInstructionsZH_HANT()));
         */
-        //holder.strDrinkThumb.setText(String.format("%s", mod.getStrDrinkThumb()));
-        // Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(imageWidth, imageHeight).centerCrop().into(holder.strDrinkThumb);
-        Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(imageWidth, imageHeight).centerCrop().into(holder.strDrinkThumb);
+        // Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).resize(0, 350).into(holder.strDrinkThumb);
+        //Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).transform(new CropSquareTransformation()).into(holder.strDrinkThumb);
+        Picasso.get().load(Uri.parse(model.get(position).getStrDrinkThumb())).into(holder.strDrinkThumb);
+        /*
         holder.strIngredient1.setText(String.format("%s", mod.getStrIngredient1()));
         holder.strIngredient2.setText(String.format("%s", mod.getStrIngredient2()));
         holder.strIngredient3.setText(String.format("%s", mod.getStrIngredient3()));
@@ -207,19 +185,24 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         holder.strMeasure13.setText(String.format("%s", mod.getStrMeasure13()));
         holder.strMeasure14.setText(String.format("%s", mod.getStrMeasure14()));
         holder.strMeasure15.setText(String.format("%s", mod.getStrMeasure15()));
-
-        /*
-        holder.strImageSource.setText(String.format("%s", mod.getStrImageSource()));
-        holder.strImageAttribution.setText(String.format("%s", mod.getStrImageAttribution()));
-        holder.strCreativeCommonsConfirmed.setText(String.format("%s", mod.getStrCreativeCommonsConfirmed()));
-        holder.dateModified.setText(String.format("%s", mod.getDateModified()));
         */
 
         holder.strDrinkThumb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                context = view.getContext();
+ //               Misc misc = new Misc();
+//                misc.createIntent(context, EXTRA_DRINK, mod.getStrDrink());
+
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra(EXTRA_ID, mod.getIdDrink());
+                // intent.putExtra(EXTRA_ID, mod.getIdDrink());
+                intent.putExtra(EXTRA_DRINK, mod.getStrDrink());
+                intent.putExtra(EXTRA_DRINK_ALTERNATE, mod.getStrTags());
+                intent.putExtra(EXTRA_STR_DRINK_THUMB, mod.getStrDrinkThumb());
+
+                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                context.startActivity(intent);
             }
         });
     }

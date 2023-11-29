@@ -7,6 +7,30 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/startService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/stopService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/show_mojito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/show_margarita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
     <TextView
         android:id="@+id/vm"
         android:layout_width="match_parent"
@@ -23,7 +47,7 @@
         android:layout_height="wrap_content"
         android:progress="0"
         android:visibility="gone"
-        style="@android:style/Widget.ProgressBar.Large.Inverse" />
+        style="@android:style/Widget.ProgressBar.Small" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

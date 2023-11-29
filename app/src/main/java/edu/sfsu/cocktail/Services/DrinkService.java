@@ -1,42 +1,43 @@
 package edu.sfsu.cocktail.Services;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
-import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-public class DrinkService extends Service {
+public class DrinkService extends IntentService {
+    /**
+     * @param name
+     * @deprecated
+     */
+
+    public static final String EXTRA_MESSAGE = "message";
+
+    public DrinkService(String name) {
+        super(name);
+    }
 
     /**
-     *
+     * The onHandleIntent() method should contain the code you want to run each time the service is passed an intent.
+     * It runs in a separate thread. If it's passed multiple intents, it deals with them one at a time.
      * @param intent
-     * @param flags
-     * @param startId
-     * @return
-     *
-     * The onStartCommand method is executed each time a component uses the startService
-     * method to start this service. As a result, it's a good place ot put code that
-     * may need to be executed multiple times.
      */
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+    protected void onHandleIntent(@Nullable Intent intent) {
+        synchronized (this) {
+            try {
+                wait(10000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        String text = intent.getStringExtra(EXTRA_MESSAGE);
+        showText(text);
     }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void showText(final String text) {
+        Log.i("LOG", "I am the service");
     }
 }

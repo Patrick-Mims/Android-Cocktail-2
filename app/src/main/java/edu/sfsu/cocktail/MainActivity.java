@@ -5,14 +5,22 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import edu.sfsu.cocktail.Models.Model;
+import edu.sfsu.cocktail.Services.DrinkService;
+import edu.sfsu.cocktail.Services.LocalService;
 import edu.sfsu.cocktail.Tasks.DataAsyncTask;
 import edu.sfsu.cocktail.ViewModel.DrinkViewModel;
 
@@ -22,10 +30,9 @@ public class MainActivity extends AppCompatActivity {
     DrinkViewModel drinkViewModel;
     RecyclerView recyclerView;
 
-    private static final String ENDPOINT = Uri.parse("https://www.thecocktaildb.com/api/json/v1/1/search.php")
-            .buildUpon()
-            .appendQueryParameter("s", "martini")
-            .build().toString();
+    public String getParsedUrl(String drink) {
+        return Uri.parse("https://www.thecocktaildb.com/api/json/v1/1/search.php").buildUpon().appendQueryParameter("s", drink).build().toString();
+    }
 
     /**
      * When you compile your app, each XML layout file is compiled into a View resource.
@@ -37,16 +44,82 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /**
+         * The onCreate() method is called when an instance of the Activity subclass is created.
+         */
         super.onCreate(savedInstanceState);
+        /**
+         * setContentView() method inflates a layout and puts it on the screen.
+         */
         setContentView(R.layout.activity_main);
 
-        TextView textView = findViewById(R.id.vm);
-
         cocktailModel = new ArrayList<>();
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView); // access elements by using their Resource ID.
         progressBar = findViewById(R.id.progressbar);
 
-        new DataAsyncTask(this, recyclerView, progressBar, cocktailModel).execute(ENDPOINT);
+        Context theContext = getBaseContext();
+        TextView textView = findViewById(R.id.vm);
+
+        Button button1 = findViewById(R.id.show_mojito);
+        button1.setText("Gin");
+
+        Button button2 = findViewById(R.id.show_margarita);
+        button2.setText("Martini");
+
+        Button button3 = findViewById(R.id.startService);
+        button3.setText("Start Service");
+
+        Button button4 = findViewById(R.id.stopService);
+        button4.setText("Stop Service");
+
+        /**
+         * Toast Notification
+         */
+        Toast toast = Toast.makeText(MainActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 0);
+
+        /**
+         * Anonymous Inner Class
+         * Everything within the outermost set of parenthesis is passed into setOnClickListener(OnClickListener)
+         * Therefore we can access textView from within
+         * 11.21.23
+         */
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                textView.setText("[ Data AsyncTask ]");
+                button1.setText("Data Loaded");
+
+                toast.show();
+                new DataAsyncTask(MainActivity.this, recyclerView, progressBar, cocktailModel).execute(getParsedUrl("gin"));
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textView.setText("[ Data AsyncTask ]");
+                button1.setText("Data Loaded");
+
+                Toast.makeText(MainActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+                new DataAsyncTask(MainActivity.this, recyclerView, progressBar, cocktailModel).execute(getParsedUrl("martini"));
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startService(new Intent(MainActivity.this, LocalService.class));
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopService(new Intent(MainActivity.this, LocalService.class));
+            }
+        });
 
         /**
          * ViewModel

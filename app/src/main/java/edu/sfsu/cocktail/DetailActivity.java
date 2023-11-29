@@ -1,13 +1,13 @@
 package edu.sfsu.cocktail;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.squareup.picasso.Picasso;
 
 import edu.sfsu.cocktail.ViewModel.DrinkViewModel;
 
@@ -59,31 +59,14 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        TextView tv = findViewById(R.id.vm);
 
-        drinkViewModel = new ViewModelProvider(this).get(DrinkViewModel.class);
+        String drink = getIntent().getStringExtra(EXTRA_DRINK);
+        String image = getIntent().getStringExtra(EXTRA_STR_DRINK_THUMB);
 
-        final Observer<String> scoreObserver = new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-               tv.setText("Patrick");
-            }
-        };
+        ImageView imageView = findViewById(R.id.mainImg);
+        TextView tv_drink = findViewById(R.id.mainDrink);
 
-        /**
-         * I need to create an Intent to call this Activity or 'this'...going to bed :<
-         */
-
-        //drinkViewModel.getScore().observe(this, scoreObserver);
-
-        /*
-        drinkViewModel.getScore().observe(this, new Observer<DrinkViewModel>() {
-            @Override
-            public void onChanged(DrinkViewModel model) {
-                tv.setText(model.getScore());
-            }
-        });
-        */
-
+        Picasso.get().load(Uri.parse(image)).resize(700, 700).into(imageView);
+        tv_drink.setText(drink);
     }
 }
