@@ -1,8 +1,10 @@
 package edu.sfsu.cocktail;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,7 +16,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -26,12 +30,14 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
 import edu.sfsu.cocktail.Fragments.LocalFragment;
+import edu.sfsu.cocktail.Fragments.NationalFragment;
+import edu.sfsu.cocktail.Fragments.WorldFragment;
 import edu.sfsu.cocktail.Models.Model;
 import edu.sfsu.cocktail.Services.LocalService;
 import edu.sfsu.cocktail.Tasks.DataAsyncTask;
 import edu.sfsu.cocktail.ViewModel.DrinkViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     ArrayList<Model> cocktailModel = null;
     ProgressBar progressBar;
@@ -172,9 +178,55 @@ public class MainActivity extends AppCompatActivity {
             textView.setText("Kamikaze");
         });
         */
-        Fragment fragment = new LocalFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.content_frame, fragment);
-        ft.commit();
+
+        /* This code will show an initial fragment on startup
+            Fragment fragment = new LocalFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.content_frame, fragment);
+            ft.commit();
+        */
+    }
+
+    /**
+     *
+     * @param item The selected item
+     * @return
+     * Navigation Drawer
+     */
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getOrder();
+        Fragment fragment = null;
+        Intent intent = null;
+
+        Log.v("LOG", "[ item.getItemId() ] => " + id);
+
+        switch(id) {
+            case 0:
+                fragment = new LocalFragment();
+                break;
+            case 1:
+                fragment = new NationalFragment();
+                break;
+            default:
+                fragment = new WorldFragment();
+                break;
+        }
+
+        //if(fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        //}
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+        return true;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

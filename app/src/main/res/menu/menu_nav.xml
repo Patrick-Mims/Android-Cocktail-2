@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
-        <item android:id="@+id/item_local" android:title="@string/fragment_local" android:checked="true"/>
-        <item android:id="@+id/item_national" android:title="@string/fragment_national" />
-        <item android:id="@+id/item_world" android:title="@string/fragment_world" />
+        <item android:id="@+id/item_local" android:title="@string/fragment_local" android:checked="true" android:orderInCategory="0"/>
+        <item android:id="@+id/item_national" android:title="@string/fragment_national" android:orderInCategory="1"/>
+        <item android:id="@+id/item_world" android:title="@string/fragment_world" android:orderInCategory="2"/>
     </group>
-    <item android:id="@+id/file" android:title="@string/nav_support">
+    <item android:id="@+id/file" android:title="@string/nav_support" android:orderInCategory="3">
         <menu>
             <item android:id="@+id/national"
-                android:icon="@android:drawable/sym_call_incoming"
+                android:icon="@android:drawable/ic_menu_search"
                 android:title="@string/fragment_national"
                 android:checked="true" />
             <item android:id="@+id/world"
