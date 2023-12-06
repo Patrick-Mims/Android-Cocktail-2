@@ -15,10 +15,6 @@
 
         <include layout="@layout/toolbar_main" android:id="@+id/toolbar" />
 
-        <FrameLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
         <Button android:id="@+id/startService" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" />
 
@@ -29,7 +25,6 @@
         <Button android:id="@+id/show_margarita" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" />
 
         <TextView android:id="@+id/vm" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" android:textColor="@color/white" />
-
         <ProgressBar
             android:id="@+id/progressbar"
             android:indeterminate="true"
@@ -40,8 +35,8 @@
             android:progress="0"
             android:visibility="gone"
             style="@android:style/Widget.ProgressBar.Small" />
-
         <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerView" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <FrameLayout android:id="@+id/content_frame" android:layout_width="match_parent" android:layout_height="match_parent"/>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
