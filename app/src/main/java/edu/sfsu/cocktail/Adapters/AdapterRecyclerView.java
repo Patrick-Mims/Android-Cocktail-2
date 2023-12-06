@@ -4,13 +4,13 @@ import static androidx.core.content.ContextCompat.startActivity;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_ID;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_DRINK;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_DRINK_ALTERNATE;
-import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_DRINK_THUMB;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_TAGS;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_CATEGORY;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_IBA;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_ALCOHOLIC;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_GLASS;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INSTRUCTIONS;
+import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_DRINK_THUMB;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT1;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT2;
 import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT3;
@@ -37,9 +37,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import edu.sfsu.cocktail.DetailActivity;
-import edu.sfsu.cocktail.MainActivity;
 import edu.sfsu.cocktail.Misc.CropSquareTransformation;
-import edu.sfsu.cocktail.Misc.Misc;
 import edu.sfsu.cocktail.Models.Model;
 import edu.sfsu.cocktail.Picasso.RoundedTransformation;
 import edu.sfsu.cocktail.R;
@@ -209,13 +207,31 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
 
                 Intent intent = new Intent(context, DetailActivity.class);
                 // intent.putExtra(EXTRA_ID, mod.getIdDrink());
+                intent.putExtra(EXTRA_ID, mod.getIdDrink());
                 intent.putExtra(EXTRA_DRINK, mod.getStrDrink());
                 intent.putExtra(EXTRA_DRINK_ALTERNATE, mod.getStrTags());
+                intent.putExtra(EXTRA_STR_CATEGORY, mod.strCategory);
+
+                /*
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_TAGS;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_CATEGORY;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_IBA;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_ALCOHOLIC;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_GLASS;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INSTRUCTIONS;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_DRINK_THUMB;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT1;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT2;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT3;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_INGREDIENT4;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_MEASURE1;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_MEASURE2;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_MEASURE3;
+                    import static edu.sfsu.cocktail.DetailActivity.EXTRA_STR_MEASURE4;
+                 */
+
                 intent.putExtra(EXTRA_STR_DRINK_THUMB, mod.getStrDrinkThumb());
-                intent.putExtra(EXTRA_ID, mod.getIdDrink());
-
                 //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                 context.startActivity(intent);
             }
         });

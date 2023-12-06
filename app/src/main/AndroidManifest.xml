@@ -13,16 +13,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Cocktail"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
+        <activity
+            android:name=".FeedbackActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+
         <service
             android:name=".Services.LocalService"
-            android:enabled="true"
-            android:exported="true"></service>
+            android:enabled="true" />
 
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -32,6 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- The service can only be used in this app:  android:exported="false" -->
+
         <service
             android:name=".Services.DrinkService"
             android:exported="false" />

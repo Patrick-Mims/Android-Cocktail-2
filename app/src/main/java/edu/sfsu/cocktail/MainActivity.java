@@ -1,6 +1,9 @@
 package edu.sfsu.cocktail;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,13 +21,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import edu.sfsu.cocktail.Fragments.LocalFragment;
 import edu.sfsu.cocktail.Models.Model;
-import edu.sfsu.cocktail.Services.DrinkService;
 import edu.sfsu.cocktail.Services.LocalService;
 import edu.sfsu.cocktail.Tasks.DataAsyncTask;
 import edu.sfsu.cocktail.ViewModel.DrinkViewModel;
 
 public class MainActivity extends AppCompatActivity {
+
     ArrayList<Model> cocktailModel = null;
     ProgressBar progressBar;
     DrinkViewModel drinkViewModel;
@@ -44,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMain);
+        setSupportActionBar(toolbar);
+
         /**
          * The onCreate() method is called when an instance of the Activity subclass is created.
          */
@@ -146,5 +153,9 @@ public class MainActivity extends AppCompatActivity {
             textView.setText("Kamikaze");
         });
         */
+        Fragment fragment = new LocalFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.content_frame, fragment);
+        ft.commit();
     }
 }

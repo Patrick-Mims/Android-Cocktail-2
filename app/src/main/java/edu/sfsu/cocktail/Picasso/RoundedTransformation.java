@@ -9,6 +9,9 @@ import android.graphics.Shader;
 
 import com.squareup.picasso.Transformation;
 
+/**
+ * This class is used with Picasso to add "Rounded Corners" to the images.
+ */
 public class RoundedTransformation implements Transformation {
     private final int radius;
     private final int margin;

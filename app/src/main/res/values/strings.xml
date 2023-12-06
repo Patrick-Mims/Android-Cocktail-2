@@ -6,4 +6,13 @@
     <string name="response">Timing</string>
     <string name="startButtonText">Start the Service</string>
     <string name="stopButtonText">Stop the Service</string>
+    <!-- Navigation -->
+    <string name="fragment_local">Local</string>
+    <string name="fragment_national">National</string>
+    <string name="fragment_world">World</string>
+    <!-- Activities -->
+    <string name="activity_about">About</string>
+    <!-- ..res/layout/menu/menu_nav -->
+    <string name="nav_support">Support</string>
+    <string name="user_name">Patrick</string>
 </resources>

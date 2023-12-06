@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import edu.sfsu.cocktail.Picasso.RoundedTransformation;
 import edu.sfsu.cocktail.ViewModel.DrinkViewModel;
 
 public class DetailActivity extends AppCompatActivity {
@@ -62,14 +63,20 @@ public class DetailActivity extends AppCompatActivity {
 
         String id = getIntent().getStringExtra(EXTRA_ID);
         String drink = getIntent().getStringExtra(EXTRA_DRINK);
-        String image = getIntent().getStringExtra(EXTRA_STR_DRINK_THUMB);
+        String thumb = getIntent().getStringExtra(EXTRA_STR_DRINK_THUMB);
+        String category = getIntent().getStringExtra(EXTRA_STR_CATEGORY);
+
+        TextView tv_bag = findViewById(R.id.bag);
 
         ImageView imageView = findViewById(R.id.mainImg);
-        TextView tv_drink = findViewById(R.id.mainDrink);
+        TextView tv_drink = findViewById(R.id.strDrink);
         TextView tv_id = findViewById(R.id.drinkID);
+        TextView tv_category = findViewById(R.id.strCategory);
 
-        Picasso.get().load(Uri.parse(image)).resize(700, 700).into(imageView);
-        tv_id.setText(id);
+        Picasso.get().load(Uri.parse(thumb)).transform(new RoundedTransformation(50, 0)).into(imageView);
         tv_drink.setText(drink);
+        tv_id.setText(id);
+        tv_category.setText(category);
+        tv_bag.setText("Bag");
     }
 }

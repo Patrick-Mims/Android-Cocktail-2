@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/item_local"
+            android:icon="@android:drawable/sym_call_incoming"
+            android:title="@string/fragment_local" />
+    </group>
+    <item android:title="@string/nav_support">
+        <menu>
+            <item android:id="@+id/item_national"
+                android:icon="@android:drawable/sym_call_incoming"
+                android:title="@string/fragment_national"
+                android:checked="true" />
+            <item android:id="@+id/item_world"
+                android:icon="@android:drawable/sym_call_incoming"
+                android:title="@string/fragment_world" />
+        </menu>
+    </item>
+</menu>
