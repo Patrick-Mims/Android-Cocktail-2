@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         // End: Drawer Toggle
 
+        // get a reference to local_fragment
+        getSupportFragmentManager().findFragmentById(R.id.local_frag);
+
         /**
          * The onCreate() method is called when an instance of the Activity subclass is created.
          */
@@ -184,7 +187,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.content_frame, fragment);
             ft.commit();
+
+            or
+
+            the code below
         */
+
+        // the problem is / was here. Investigate this tonight
+        // getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.content_frame, new LocalFragment()).commit();
     }
 
     /**

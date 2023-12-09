@@ -15,7 +15,6 @@
 
         <include layout="@layout/toolbar_main" android:id="@+id/toolbar" />
 
-
         <Button android:id="@+id/startService" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" />
 
         <Button android:id="@+id/stopService" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" />
@@ -25,6 +24,22 @@
         <Button android:id="@+id/show_margarita" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" />
 
         <TextView android:id="@+id/vm" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" android:textColor="@color/white" />
+
+        <fragment
+            android:name="edu.sfsu.cocktail.Fragments.LocalFragment"
+            android:id="@+id/local_frag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!-- Embed the Local Fragment inside of the main activity -->
+        <!-- This is one way of doing it, the other is to add it in the MainActivity -->
+        <!--
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="edu.sfsu.cocktail.Fragments.LocalFragment" />
+        -->
+
         <ProgressBar
             android:id="@+id/progressbar"
             android:indeterminate="true"
@@ -36,7 +51,9 @@
             android:visibility="gone"
             style="@android:style/Widget.ProgressBar.Small" />
         <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerView" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
         <FrameLayout android:id="@+id/content_frame" android:layout_width="match_parent" android:layout_height="match_parent"/>
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
